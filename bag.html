@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DailyMe • My Bag</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:#FFF8FB;
+    background-image:radial-gradient(#FFD3E8 1px,transparent 1px);
+    background-size:22px 22px;
+}
+
+h1,h2{
+    font-family:'Bricolage Grotesque',sans-serif;
+}
+
+.shadow-box{
+    box-shadow:6px 6px 0 black;
+}
+
+.icon{
+    transition:.25s;
+}
+.icon:hover{
+    transform:scale(1.1) rotate(-6deg);
+}
+
+.selected{
+    background:#FBCFE8 !important;
+    transform:scale(1.1);
+}
+
+.check-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:white;
+    border:2px solid black;
+    border-radius:16px;
+    padding:12px;
+    margin-bottom:10px;
+}
+
+button, a { cursor: pointer; }
+
+
+/* ===== REAL BAG + POP ITEMS ===== */
+.bag-stage{position:relative;height:530px;overflow:hidden;background:linear-gradient(180deg,#fff1f7 0%,#fff8fb 60%,#fce7f3 100%)}
+.real-bag{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);width:290px;height:300px;filter:drop-shadow(10px 12px 0 rgba(0,0,0,.95));}
+.real-bag .bag-body{position:absolute;left:0;right:0;bottom:0;height:245px;background:linear-gradient(135deg,#fff8e8,#f3dfbd);border:4px solid #111;border-radius:24px 24px 34px 34px;overflow:visible;}
+.real-bag .bag-body:before{content:'';position:absolute;left:0;right:0;top:0;height:22px;background:#d6b98d;border-bottom:4px solid #111;border-radius:18px 18px 45% 45%;}
+.real-bag .handle{position:absolute;top:0;width:102px;height:112px;border:13px solid #111;border-bottom:0;border-radius:55px 55px 0 0;z-index:-1;}
+.real-bag .handle.left{left:30px}.real-bag .handle.right{right:30px}
+.real-bag .handle:after{content:'';position:absolute;inset:7px;border:8px solid #e8cda5;border-bottom:0;border-radius:45px 45px 0 0;}
+.real-bag .pocket{position:absolute;width:145px;height:78px;left:50%;bottom:48px;transform:translateX(-50%);border:3px solid #111;border-radius:8px 8px 20px 20px;background:#f7ead1;text-align:center;padding-top:12px;font-weight:800;color:#ec4899;letter-spacing:2px;}
+.real-bag .stitch{position:absolute;inset:15px;border:2px dashed rgba(60,40,20,.35);border-radius:15px 15px 25px 25px;pointer-events:none;}
+#bagItemsLayer{position:absolute;left:33px;right:33px;top:58px;height:132px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;justify-content:center;z-index:5;overflow:hidden;padding:8px;}
+.packed-emoji{font-size:36px;animation:itemPop .55s cubic-bezier(.2,.9,.25,1.35);filter:drop-shadow(1px 2px 0 rgba(0,0,0,.25));}
+@keyframes itemPop{0%{transform:translateY(-90px) scale(.1) rotate(-25deg);opacity:0}65%{transform:translateY(10px) scale(1.25) rotate(8deg);opacity:1}100%{transform:translateY(0) scale(1) rotate(0)}}
+@keyframes itemOut{to{transform:translateY(-70px) scale(.2) rotate(18deg);opacity:0}}
+.fly-item{position:fixed;z-index:9999;pointer-events:none;font-size:44px;transition:all .55s cubic-bezier(.2,.8,.25,1);}
+.bag-bounce{animation:bagBounce .45s ease}
+@keyframes bagBounce{0%,100%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.06) rotate(-2deg)}70%{transform:translate(-50%,-50%) scale(.98) rotate(1deg)}}
+
+</style>
+
+
+<!-- Subtle bag refinement: keep the original real-bag interaction, simplify styling -->
+<style id="dailyme-bag-refinement">
+body{background:#fffafc!important;background-image:none!important;color:#29252a}
+.shadow-box{box-shadow:0 6px 20px rgba(45,35,40,.08)!important}
+aside{background:#fbf2f6!important;border-right:1px solid #eadde4!important;box-shadow:none!important}
+aside h1{color:#b77793!important}
+aside button{border:1px solid #e8dce3!important;border-radius:12px!important;box-shadow:none!important;background:#fff!important;transition:background .18s ease,transform .18s ease}
+aside button:hover{background:#f9eaf1!important;transform:translateX(2px)}
+aside button.bg-pink-300{background:#f2dce6!important;color:#59414c}
+main .bg-white.rounded-\[35px\]{border:1px solid #e8dce3!important;box-shadow:0 6px 20px rgba(45,35,40,.07)!important;border-radius:24px!important}
+.bag-stage{background:linear-gradient(180deg,#fcf5f8 0%,#fffafc 100%)!important;border:1px solid #e8dce3!important;border-radius:24px!important}
+.real-bag{filter:drop-shadow(5px 7px 8px rgba(40,30,35,.14))!important}
+.real-bag .bag-body{border-color:#7e6b5d!important}
+.real-bag .bag-body:before{border-bottom-color:#7e6b5d!important}
+.real-bag .handle{border-color:#7e6b5d!important}
+.real-bag .handle:after{border-color:#d8c3a7!important}
+.real-bag .pocket{border-color:#a89581!important;color:#b77793!important}
+.check-item{border:1px solid #e8dce3!important;border-radius:14px!important}
+.selected{background:#f2dce6!important;transform:scale(1.03)!important}
+.icon:hover{transform:scale(1.04)!important}
+</style>
+
+</head>
+
+<body class="min-h-screen flex">
+
+<!-- Sidebar -->
+<aside class="hidden md:flex w-56 bg-pink-100 border-r-4 border-black flex-col p-5 gap-4 shadow-box">
+
+    <h1 class="text-3xl font-black text-pink-500">DailyMe 🌷</h1>
+
+    <button onclick="goHome()" class="bg-white border-2 border-black rounded-xl p-3 text-left hover:bg-pink-200">🏠 Home</button>
+
+    <button onclick="goOutfit()" class="bg-white border-2 border-black rounded-xl p-3 text-left hover:bg-pink-200">👗 Outfit</button>
+
+    <button onclick="goBag()" class="bg-pink-300 border-2 border-black rounded-xl p-3 text-left font-bold">🎒 My Bag</button>
+
+    <button onclick="goWeather()" class="bg-white border-2 border-black rounded-xl p-3 text-left hover:bg-pink-200">☁️ Weather</button>
+
+    <button onclick="goMood()" class="bg-white border-2 border-black rounded-xl p-3 text-left hover:bg-pink-200">🎵 Mood Shelf</button>
+
+    <div class="mt-auto text-center text-sm text-pink-500">
+        Curated with love 🎀
+    </div>
+
+</aside>
+
+<!-- Main -->
+<main class="flex-1 p-6">
+
+<!-- Header -->
+<div class="flex justify-between items-center mb-8">
+
+    <div>
+        <p class="uppercase tracking-[5px] text-pink-400 text-sm">DAILY ESSENTIALS</p>
+
+        <h1 class="text-5xl font-black text-pink-500 mt-2">
+            What's In My Bag?
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+            Pick everything you want to carry today ✨
+        </p>
+    </div>
+
+    <div class="text-6xl">🎒</div>
+
+</div>
+
+<div class="grid lg:grid-cols-2 gap-8">
+
+<!-- LEFT -->
+<div class="bg-white rounded-[35px] border-4 border-black p-6 shadow-box">
+
+<h2 class="text-3xl font-black mb-5">👜 My Cute Tote Bag</h2>
+
+<div class="bag-stage rounded-[35px] border-2 border-black">
+
+  <div class="absolute top-5 left-5 text-4xl icon">🎀</div>
+  <div class="absolute top-12 right-6 text-4xl icon">⭐</div>
+  <div class="absolute bottom-8 left-8 text-4xl icon">💌</div>
+  <div class="absolute bottom-12 right-6 text-4xl icon">🧸</div>
+
+  <div id="realBag" class="real-bag" aria-label="DailyMe tote bag">
+    <div class="handle left"></div>
+    <div class="handle right"></div>
+    <div class="bag-body">
+      <div class="stitch"></div>
+      <div id="bagItemsLayer"></div>
+      <div class="pocket">DAILYME<br><span class="text-xs tracking-normal text-gray-500">MY DAY BAG</span></div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-gray-500 bg-white/80 px-3 py-1 rounded-full border border-black">
+    Tap an item → it pops into the bag ✨
+  </div>
+
+</div>
+
+<p id="bagCount" class="mt-6 text-center text-xl font-bold text-pink-500">
+0 items packed today 🎒
+</p>
+
+</div>
+
+<!-- RIGHT -->
+<div class="space-y-6">
+
+<!-- Essentials -->
+<div class="bg-white rounded-[35px] border-4 border-black p-6 shadow-box">
+
+<h2 class="text-3xl font-black mb-5">✨ Cute Essentials</h2>
+
+<div class="grid grid-cols-3 gap-4 text-5xl text-center">
+
+<button class="icon bg-pink-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Lip Balm 💄')">💄</button>
+
+<button class="icon bg-yellow-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Camera 📸')">📸</button>
+
+<button class="icon bg-green-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Headphones 🎧')">🎧</button>
+
+<button class="icon bg-purple-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Notebook 📓')">📓</button>
+
+<button class="icon bg-blue-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Water Bottle 💧')">💧</button>
+
+<button class="icon bg-pink-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Perfume 🌸')">🌸</button>
+
+<button class="icon bg-orange-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Sunscreen 🧴')">🧴</button>
+
+<button class="icon bg-sky-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Power Bank 🔋')">🔋</button>
+
+<button class="icon bg-rose-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Mirror 🪞')">🪞</button>
+
+<button class="icon bg-pink-50 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Hair Clip 🎀')">🎀</button>
+
+<button class="icon bg-indigo-100 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'AirPods 🎵')">🎵</button>
+
+<button class="icon bg-pink-50 border-2 border-black rounded-2xl p-4" onclick="toggleItem(this,'Mini Teddy 🧸')">🧸</button>
+
+</div>
+
+</div>
+
+<!-- Checklist -->
+<div class="bg-[#FFFBEA] rounded-[35px] border-4 border-black p-6 shadow-box">
+
+<h2 class="text-3xl font-black mb-4">📝 Today's Checklist</h2>
+
+<div class="flex gap-3 mb-4">
+
+<input id="newItem"
+type="text"
+placeholder="Add something cute..."
+class="flex-1 border-2 border-black rounded-xl p-3">
+
+<button onclick="addItem()"
+class="bg-pink-300 border-2 border-black rounded-xl px-5 font-bold hover:bg-pink-400">
++
+</button>
+
+</div>
+
+<ul id="todoList"></ul>
+
+</div>
+
+<!-- Navigation Buttons -->
+<div class="flex justify-between pt-2">
+
+<button onclick="goOutfit()"
+class="bg-white border-2 border-black rounded-full px-6 py-3 font-bold shadow-box hover:bg-pink-100">
+← Outfit
+</button>
+
+<button onclick="goMood()"
+class="bg-pink-300 border-2 border-black rounded-full px-6 py-3 font-bold shadow-box hover:bg-pink-400">
+Mood Shelf →
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+<!-- JavaScript -->
+<script src="js/bag.js"></script>
+
+</body>
+</html>

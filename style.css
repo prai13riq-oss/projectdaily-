@@ -1,0 +1,212 @@
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:#F8F8F8;
+}
+
+.grid-pattern{
+  background-image:
+    linear-gradient(#E2E2E2 1px,transparent 1px),
+    linear-gradient(90deg,#E2E2E2 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+.desktop{
+  display:flex;
+  min-height:100vh;
+}
+
+.sidebar{
+  width:220px;
+  background:#DDF7F7;
+  border-right:4px solid black;
+  padding:25px;
+}
+
+.sidebar h1{
+  font-size:34px;
+  margin:0;
+  color:#2D6668;
+}
+
+.sidebar nav{
+  display:flex;
+  flex-direction:column;
+  margin-top:40px;
+  gap:18px;
+}
+
+.sidebar a{
+  text-decoration:none;
+  color:black;
+  font-weight:bold;
+}
+
+.main-screen{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
+}
+
+.window{
+  width:700px;
+  border:4px solid black;
+  background:white;
+  box-shadow:8px 8px black;
+}
+
+.window-title{
+  background:#B8ECEC;
+  padding:12px 18px;
+  border-bottom:4px solid black;
+  font-weight:bold;
+}
+
+.window-content{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  padding:30px;
+}
+
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  border:3px solid black;
+}
+
+button{
+  margin-top:20px;
+  padding:14px 28px;
+  border-radius:999px;
+  background:black;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#444;
+}
+
+.block-shadow{
+  box-shadow:4px 4px 0 black;
+}
+
+.block-shadow-hover:hover{
+  transform:translate(2px,2px);
+  box-shadow:2px 2px 0 black;
+}
+
+.sticker{
+  filter:drop-shadow(2px 2px 0 black);
+}
+/* ===== Welcome Page ===== */
+
+.welcome-page{
+background:linear-gradient(#FFF8FB,#E7FFF7);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:'Poppins',sans-serif;
+}
+
+.welcome-card{
+width:380px;
+background:white;
+border:3px solid black;
+border-radius:30px;
+padding:35px;
+text-align:center;
+box-shadow:10px 10px black;
+position:relative;
+}
+
+.sticker{
+position:absolute;
+top:-20px;
+left:20px;
+background:#FFFDF8;
+padding:6px 14px;
+border:2px solid black;
+border-radius:20px;
+font-size:22px;
+}
+
+.avatar{
+width:140px;
+height:140px;
+border-radius:50%;
+border:3px solid black;
+margin-bottom:20px;
+}
+
+.welcome-card h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.subtitle{
+color:#555;
+margin-top:15px;
+}
+
+#startBtn{
+margin-top:25px;
+width:100%;
+padding:15px;
+border-radius:50px;
+border:2px solid black;
+background:#FFD9E6;
+font-weight:bold;
+box-shadow:4px 4px black;
+}
+
+#startBtn:hover{
+transform:translate(2px,2px);
+box-shadow:2px 2px black;
+}
+
+/* ===== Outfit Page ===== */
+
+.outfit-card{
+background:#FFFDF8;
+border:3px solid black;
+border-radius:24px;
+padding:20px;
+box-shadow:6px 6px black;
+}
+
+.clothes-item{
+background:white;
+border:2px solid black;
+border-radius:16px;
+padding:10px;
+cursor:pointer;
+transition:.2s;
+}
+
+.clothes-item:hover{
+transform:scale(1.05);
+background:#FFE8F0;
+}
+
+.avatar-container{
+background:#FFEFF5;
+border:3px solid black;
+border-radius:30px;
+height:650px;
+position:relative;
+overflow:hidden;
+}
+
+.avatar-container img{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+width:250px;
+}
